@@ -1,6 +1,6 @@
 ![KryoNet](https://raw.github.com/wiki/EsotericSoftware/kryonet/images/logo.jpg)
 
-[![Release](https://jitpack.io/v/crykn/kryonet.svg)](https://jitpack.io/#crykn/kryonet)
+[![Release](https://jitpack.io/v/crykn/kryonet.svg)](https://jitpack.io/#crykn/kryonet) [![Build Status](https://travis-ci.org/crykn/quakemonkey.svg?branch=master)](https://travis-ci.org/crykn/quakemonkey)
 
 A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java library that provides a clean and simple API for efficient network communication.
 
@@ -13,6 +13,7 @@ This fork was specifically made for [ProjektGG](https://github.com/eskalon/Proje
 * Includes a fix for the common Android 5.0 crash ([#106](https://github.com/EsotericSoftware/kryonet/issues/106), [#120](https://github.com/EsotericSoftware/kryonet/issues/106))
 * The LAN Host Discovery is now available to Non-Kryo-Serializations ([#127](https://github.com/EsotericSoftware/kryonet/issues/127))
 * Kryonet now uses a [gradle](https://gradle.org/) build setup
+* Improved the tests as well as the  code coverage
 * Java 9+ is supported
 * Various improvements to the documentation (also takes care of [#35](https://github.com/EsotericSoftware/kryonet/issues/35), [#44](https://github.com/EsotericSoftware/kryonet/issues/44), [#124](https://github.com/EsotericSoftware/kryonet/issues/124), [#137](https://github.com/EsotericSoftware/kryonet/issues/137))
 * And a lot more minor fixes and changes

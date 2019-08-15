@@ -33,6 +33,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
@@ -41,7 +42,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.security.AccessControlException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -608,27 +609,27 @@ public class Client extends Connection implements EndPoint {
 		dataBuffer.flip();
 		byte[] data = new byte[dataBuffer.limit()];
 		dataBuffer.get(data);
-		for (NetworkInterface iface : Collections
-				.list(NetworkInterface.getNetworkInterfaces())) {
-			for (InetAddress address : Collections
-					.list(iface.getInetAddresses())) {
-				// Java 1.5 doesn't support getting the subnet mask, so try the
-				// two most common.
-				byte[] ip = address.getAddress();
-				ip[3] = -1; // 255.255.255.0
-				try {
-					socket.send(new DatagramPacket(data, data.length,
-							InetAddress.getByAddress(ip), udpPort));
-				} catch (Exception ignored) {
-				}
-				ip[2] = -1; // 255.255.0.0
-				try {
-					socket.send(new DatagramPacket(data, data.length,
-							InetAddress.getByAddress(ip), udpPort));
-				} catch (Exception ignored) {
-				}
+
+		Enumeration<NetworkInterface> interfaces = NetworkInterface
+				.getNetworkInterfaces();
+		while (interfaces.hasMoreElements()) {
+			NetworkInterface networkInterface = interfaces.nextElement();
+
+			if (networkInterface.isLoopback() || !networkInterface.isUp()) {
+				continue;
+			}
+
+			for (InterfaceAddress address : networkInterface
+					.getInterfaceAddresses()) {
+				InetAddress broadcast = address.getBroadcast();
+				if (broadcast == null)
+					continue;
+
+				socket.send(new DatagramPacket(data, data.length, broadcast,
+						udpPort));
 			}
 		}
+
 		if (DEBUG)
 			debug("kryonet", "Broadcasted host discovery on port: " + udpPort);
 	}

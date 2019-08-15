@@ -20,6 +20,8 @@
 package com.esotericsoftware.kryonet;
 
 public class KryoNetException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+
 	public KryoNetException() {
 		super();
 	}

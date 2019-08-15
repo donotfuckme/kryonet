@@ -39,8 +39,7 @@ import com.esotericsoftware.kryonet.serialization.Serialization;
  * @author Nathan Sweet <misc@n4te.com>
  */
 class TcpConnection {
-	private static final int IPTOS_LOWDELAY = 0x10;
-
+	
 	SocketChannel socketChannel;
 	int keepAliveMillis = 8000;
 	final ByteBuffer readBuffer, writeBuffer;

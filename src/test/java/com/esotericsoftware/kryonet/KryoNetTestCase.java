@@ -33,13 +33,13 @@ abstract public class KryoNetTestCase extends TestCase {
 	static public String host = "localhost";
 	static public int tcpPort = 54555, udpPort = 54777;
 
-	private ArrayList<Thread> threads = new ArrayList();
-	ArrayList<EndPoint> endPoints = new ArrayList();
+	private ArrayList<Thread> threads = new ArrayList<>();
+	ArrayList<EndPoint> endPoints = new ArrayList<>();
 	private Timer timer;
 	boolean fail;
 
 	public KryoNetTestCase() {
-		// Log.TRACE();
+		Log.TRACE();
 		// Log.DEBUG();
 		Log.setLogger(new Logger() {
 			public void log(int level, String category, String message,
@@ -99,7 +99,7 @@ abstract public class KryoNetTestCase extends TestCase {
 		};
 		timer.schedule(failTask, 13000);
 		while (true) {
-			for (Iterator iter = threads.iterator(); iter.hasNext();) {
+			for (Iterator<Thread> iter = threads.iterator(); iter.hasNext();) {
 				Thread thread = (Thread) iter.next();
 				if (!thread.isAlive())
 					iter.remove();

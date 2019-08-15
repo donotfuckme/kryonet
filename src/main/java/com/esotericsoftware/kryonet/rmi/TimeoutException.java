@@ -29,6 +29,8 @@ package com.esotericsoftware.kryonet.rmi;
  *      int, Class...)
  */
 public class TimeoutException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+
 	public TimeoutException() {
 		super();
 	}

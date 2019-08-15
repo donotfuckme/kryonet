@@ -69,7 +69,7 @@ public class Server implements EndPoint {
 	private ServerSocketChannel serverChannel;
 	private UdpConnection udp;
 	private Connection[] connections = {};
-	private IntMap<Connection> pendingConnections = new IntMap();
+	private IntMap<Connection> pendingConnections = new IntMap<>();
 	Listener[] listeners = {};
 	private Object listenerLock = new Object();
 	private int nextConnectionID = 1;
@@ -614,7 +614,7 @@ public class Server implements EndPoint {
 	}
 
 	void removeConnection(Connection connection) {
-		ArrayList<Connection> temp = new ArrayList(Arrays.asList(connections));
+		ArrayList<Connection> temp = new ArrayList<>(Arrays.asList(connections));
 		temp.remove(connection);
 		connections = temp.toArray(new Connection[temp.size()]);
 

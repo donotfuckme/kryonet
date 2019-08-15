@@ -39,7 +39,8 @@ public class JsonTest extends KryoNetTestCase {
 				new JsonSerialization());
 		startEndPoint(server);
 		server.bind(tcpPort, udpPort);
-		server.addListener(new Listener() {
+		Listener listener;
+		server.addListener(listener = new Listener() {
 			public void connected(Connection connection) {
 				connection.sendTCP(dataTCP);
 				connection.sendUDP(dataUDP); // Note UDP ping pong stops if a
@@ -104,6 +105,12 @@ public class JsonTest extends KryoNetTestCase {
 
 		waitForThreads(5000);
 
+		if (fail == null) {
+			server.removeListener(listener);
+			assertEquals(0, server.listeners.length);
+		}
+		
+		
 		if (fail != null)
 			fail(fail);
 	}

@@ -56,3 +56,12 @@ dependencies {
    compile 'com.github.crykn:kryonet:2.22.4'
 }
 ```
+
+## Further reading
+
+Beyond this documentation page, you may find the following links useful:
+
+- [Documentation](https://github.com/EsotericSoftware/kryonet/blob/master/README.md) of the parent repo
+- [Kryo](https://github.com/EsotericSoftware/kryo) (the library used for the serialization in _Kryo_Net)
+- [Example code](examples/com/esotericsoftware/kryonet/examples)
+- [Unit tests](src/test/java/com/esotericsoftware/kryonet)

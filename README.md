@@ -300,10 +300,10 @@ The [Apache MINA](http://mina.apache.org/) project is similar to KryoNet. MINA's
 The [PyroNet](https://code.google.com/p/pyronet/) project (discontinued) is a minimal layer over NIO. It provides TCP networking similar to KryoNet, but without the higher level features. Priobit requires all network communication to occur on a single thread.
 
 The [Java Game Networking](http://code.google.com/p/jgn/) project (discontinued as well) is a higher level library similar to KryoNet. JGN does not have as simple of an API.
-  
-</details>
 
 ---
+  
+</details>
 
 ## Download
 
@@ -320,7 +320,7 @@ allprojects {
 }
 	
 dependencies {
-   compile 'com.github.crykn:kryonet:2.22.5'
+   compile 'com.github.crykn:kryonet:2.22.6'
 }
 ```
 

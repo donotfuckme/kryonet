@@ -7,16 +7,15 @@ A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java librar
 This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG) but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet doesn't seem to be actively maintained anymore.
 
 ## Key Changes
-* [Kryo 5.0.0-RC4](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0-RC4) is used for the serialization (for a list of changes and new features see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
-* A TypeListener for easier message handling (see the example below; also fixes [#130](https://github.com/EsotericSoftware/kryonet/issues/130))
-* Listener is now an interface ([#39](https://github.com/EsotericSoftware/kryonet/issues/39)) with empty default methods which helps to reduce boilerplate code
+* [Kryo 5.0.0-RC4](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0-RC4) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
+* `Listener` is now an interface ([#39](https://github.com/EsotericSoftware/kryonet/issues/39)) with empty default methods, which helps to reduce boilerplate code
 * Includes a fix for the common Android 5.0 crash ([#106](https://github.com/EsotericSoftware/kryonet/issues/106), [#120](https://github.com/EsotericSoftware/kryonet/issues/106))
-* The LAN Host Discovery is now available to Non-Kryo-Serializations ([#127](https://github.com/EsotericSoftware/kryonet/issues/127))
+* The LAN Host Discovery was improved ([#133](https://github.com/EsotericSoftware/kryonet/pull/133)) and is now available to Non-Kryo-Serializations ([#127](https://github.com/EsotericSoftware/kryonet/issues/127))
+* A [TypeListener](#typelisteners) was added for easier message handling (takes care of [#130](https://github.com/EsotericSoftware/kryonet/issues/130))
+* Various improvements to the javadoc (especially [#35](https://github.com/EsotericSoftware/kryonet/issues/35), [#44](https://github.com/EsotericSoftware/kryonet/issues/44), [#124](https://github.com/EsotericSoftware/kryonet/issues/124), [#137](https://github.com/EsotericSoftware/kryonet/issues/137)); helps to reduce the most common developer mistakes
 * KryoNet now uses a [gradle](https://gradle.org/) build setup
-* Improved the tests as well as the  code coverage
-* Java 9+ is supported
-* Various improvements to the documentation (also takes care of [#35](https://github.com/EsotericSoftware/kryonet/issues/35), [#44](https://github.com/EsotericSoftware/kryonet/issues/44), [#124](https://github.com/EsotericSoftware/kryonet/issues/124), [#137](https://github.com/EsotericSoftware/kryonet/issues/137))
-* And a lot more minor fixes and changes
+* Java 8+ is supported
+* And a lot more minor fixes and changes; the documentation (see below) was updated as well
 
 A more in-depth changelog is available on the [releases](https://github.com/crykn/kryonet/releases) page.
 
@@ -24,7 +23,7 @@ A more in-depth changelog is available on the [releases](https://github.com/cryk
 KryoNet is ideal for any client/server application. It is very efficient, so is especially good for games. KryoNet can also be useful for inter-process communication.
 
 <details>
-  <summary>Expand the whole documentation</summary>
+  <summary><b><i>Click to expand the whole documentation</i></b></summary>
   
 - [Running a server](#running-a-server)
 - [TypeListeners](#typelisteners)
@@ -38,6 +37,8 @@ KryoNet is ideal for any client/server application. It is very efficient, so is 
 - [Logging](#logging)
 - [Remote Method Invocation (RMI)](#remote-method-invocation)
 - [KryoNet versus ?](#kryonet-versus-)
+
+---
 
 ### Running a server
 
@@ -86,6 +87,8 @@ Typically a listener has a series of `instanceof` checks to decide what to do wi
 
 Note the Listener class also has `connected(Connection)` and `disconnected(Connection)` methods that can be overridden.
 
+---
+
 ### TypeListeners
 
 Type listeners takes care of distributing received messages to previously specified handlers. This replaces the long instanceof checks and allows for rather concise code, especially with lambdas: 
@@ -109,6 +112,7 @@ server.addListener(typeListener);
 
 In the above example `con` is the connection to the client and `msg` is the received object - already cast to the right type.
 
+---
 
 ### Connecting a client
 
@@ -141,6 +145,7 @@ This code adds a listener to print out the response:
     });
 ```
 
+---
 
 ### Registering classes
 
@@ -159,6 +164,7 @@ This must be done on both the client and server, before any network communicatio
 
 Please look at the [Kryo serialization library](https://github.com/EsotericSoftware/kryo) for more information on how objects are serialized for network transfer. Kryo can serialize any object and supports data compression (e.g. deflate compression).
 
+---
 
 ### TCP and UDP
 
@@ -168,8 +174,9 @@ KryoNet always uses a TCP port. This allows the framework to easily perform reli
 
 Note that KryoNet does not currently implement any extra features for UDP, such as reliability or flow control. It is left to the application to make proper use of the UDP connection. See [here](https://github.com/crykn/quakemonkey) for an example of a delta-snapshot-protocol.
 
+---
 
-## Buffer sizes
+### Buffer sizes
 
 KryoNet uses a few buffers for serialization and deserialization that must be sized appropriately for a specific application. See the `Client` and `Server` constructors for customizing the buffer sizes. There are two types of buffers, a write buffer and an object buffer.
 
@@ -179,6 +186,7 @@ To send an object graph, it is serialized to the write buffer where it is queued
 
 To avoid very large buffer sizes, object graphs can be split into smaller pieces and sent separately. Collecting the pieces and reassembling the larger object graph, or writing them to disk, etc is left to the application code. If a large number of small object graphs are queued to be written at once, it may exceed the write buffer size. `TcpIdleSender` and `InputStreamSender` can be used to queue more data only when the connection is idle. Also see the `setIdleThreshold` method on the Connection class.
 
+---
 
 ### Threading
 
@@ -190,6 +198,7 @@ Listeners are notified from the update thread, so should not block for long. To 
 
 The update thread should never be blocked to wait for an incoming network message, as this will cause a deadlock.
 
+---
 
 ### LAN server discovery
 
@@ -202,6 +211,7 @@ KryoNet can broadcast a UDP message on the LAN to discover any servers running:
 
 This will print the address of the first server found running on UDP port 54777. The call will block for up to 5000 milliseconds, waiting for a response. A more in-depth example (where additional data is sent) can be found in the `DiscoverHostTest`.
 
+---
 
 ### Logging
 
@@ -215,6 +225,7 @@ KryoNet does minimal logging at INFO and above levels. DEBUG is good to use duri
 
 MinLog supports a fixed logging level, which will remove logging statements below that level. For efficiency, KryoNet can be compiled with a fixed logging level MinLog JAR. See [here](https://github.com/EsotericSoftware/minlog#fixed-logging-levels) for more information.
 
+---
 
 ### Pluggable Serialization
 
@@ -222,12 +233,13 @@ Serialization can be customized by providing a Serialization instance to the Cli
 
 Additionally, JSON serialization is provided which uses [JsonBeans](https://github.com/EsotericSoftware/jsonbeans). JSON is human readable so is convenient for use during development to monitor the data being sent and received.
 
+---
 
 ### Remote Method Invocation
 
 KryoNet has an easy to use mechanism for invoking methods on remote objects (RMI). This has a small amount of overhead versus explicitly sending objects. RMI can hide that methods are being marshaled and executed remotely, but in practice the code using such methods will need to be aware of the network communication to handle errors and methods that block. KryoNet's RMI is not related to the java.rmi package.
 
-RMI is done by first calling `registerClasses`, creating an ObjectSpace and registering objects with an ID:
+RMI is done by first calling `registerClasses`, creating an ObjectSpace and registering objects with an ID on one side of the connection:
 
 ```java
     ObjectSpace.registerClasses(endPoint.getKryo());
@@ -244,7 +256,7 @@ Multiple ObjectSpaces can be created for both the client or server side. Once re
     SomeResult result = someObject.doSomething();
 ```
 
-The `getRemoteObject` method returns a proxy object that represents the specified class. When a method on the class is called, a message is sent over the connection and on the remote side the method is invoked on the registered object. The method blocks until the return value is sent back over the connection.
+The `getRemoteObject(...)` method returns a proxy object that represents the specified class. When a method on the class is called, a message is sent over the connection and on the remote side the method is invoked on the registered object. The method blocks until the return value is sent back over the connection.
 
 Exactly how the remote method invocation is performed can be customized by casting the proxy object to a RemoteObject.
 
@@ -277,6 +289,8 @@ If the second parameter for `setNonBlocking` is false, the server will send back
     SomeResult result = remoteObject.waitForResponse(responseID);
 ```
 
+---
+
 ### KryoNet versus ?
 
 KryoNet makes the assumptions that it will only be used for client/server architectures and that it will be used on both sides of the network. Because KryoNet solves a specific problem, the KryoNet API can do so very elegantly.
@@ -288,6 +302,8 @@ The [PyroNet](https://code.google.com/p/pyronet/) project (discontinued) is a mi
 The [Java Game Networking](http://code.google.com/p/jgn/) project (discontinued as well) is a higher level library similar to KryoNet. JGN does not have as simple of an API.
   
 </details>
+
+---
 
 ## Download
 

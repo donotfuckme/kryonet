@@ -70,7 +70,7 @@ This code adds a listener to handle receiving objects:
 ```
 
 <details>
-  <summary>The class definitions of 'SomeRequest' and 'SomeResponse'</summary>
+  <summary><b><i>Click to expand the class definitions of 'SomeRequest' and 'SomeResponse'</i></b></summary>
   
 ```java
     public class SomeRequest {

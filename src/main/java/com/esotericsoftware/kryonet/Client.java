@@ -188,7 +188,9 @@ public class Client extends Connection implements EndPoint {
 
 	/**
 	 * Opens a TCP and UDP client. Blocks until the connection is complete or
-	 * the timeout is reached.
+	 * the timeout is reached. A timeout of zero is interpreted as an infinite
+	 * timeout. The connection will then block until established or an error
+	 * occurs.
 	 * <p>
 	 * Because the framework must perform some minimal communication before the
 	 * connection is considered successful, {@link #update(int)} must be called
@@ -231,7 +233,7 @@ public class Client extends Connection implements EndPoint {
 				selector.wakeup();
 				endTime = System.currentTimeMillis() + timeout;
 				tcp.connect(selector, new InetSocketAddress(host, tcpPort),
-						5000);
+						connectTimeout);
 			}
 
 			// Wait for RegisterTCP.

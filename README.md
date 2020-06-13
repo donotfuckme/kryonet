@@ -15,7 +15,7 @@ This fork was specifically made for [ProjektGG](https://github.com/eskalon/Proje
 * Various improvements to the javadoc (especially [#35](https://github.com/EsotericSoftware/kryonet/issues/35), [#44](https://github.com/EsotericSoftware/kryonet/issues/44), [#124](https://github.com/EsotericSoftware/kryonet/issues/124), [#137](https://github.com/EsotericSoftware/kryonet/issues/137)); helps to reduce the most common developer mistakes
 * KryoNet now uses a [gradle](https://gradle.org/) build setup
 * Java 8+ is supported
-* And a lot more minor fixes and changes; the documentation (see below) was updated as well
+* And a lot more minor fixes and changes (inter alia [#109](https://github.com/EsotericSoftware/kryonet/issues/109#issuecomment-643352317)); the documentation (see below) was updated as well
 
 A more in-depth changelog is available on the [releases](https://github.com/crykn/kryonet/releases) page.
 

@@ -4,7 +4,7 @@
 
 A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java library that provides a clean and simple API for efficient network communication.
 
-This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG) but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet doesn't seem to be actively maintained anymore.
+This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG), but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet does not seem to be actively maintained anymore.
 
 ## Key Changes
 * [Kryo 5.0.0-RC6](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0-RC6) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
@@ -130,7 +130,7 @@ This code connects to a server running on TCP port 54555 and UDP port 54777:
 
 The `start()` method starts a thread to handle the outgoing connection, reading/writing to the socket, and notifying listeners. Note that this method must be called before `connect(...)`, otherwise the outgoing connection will fail.
 
-In the above example, the `connect(...)` method blocks for a maximum of 5000 milliseconds. If it times-out or the connecting otherwise fails, an exception is thrown (handling not shown). After the connection is made, the example sends a `SomeRequest` object to the server over TCP.
+In the above example, the `connect(...)` method blocks for a maximum of 5000 milliseconds. If it times-out or the connecting otherwise fails, an exception is thrown (handling not shown in the example above). After the connection is made, the example sends a `SomeRequest` object to the server over TCP.
 
 This code adds a listener to print out the response:
 
@@ -170,7 +170,7 @@ Please look at the [Kryo serialization library](https://github.com/EsotericSoftw
 
 KryoNet always uses a TCP port. This allows the framework to easily perform reliable communication and have a stateful connection. KryoNet can optionally use a UDP port in addition to the TCP one. While both ports can be used simultaneously, it is not recommended to send an huge amount of data on both at the same time because the two protocols can [affect each other](http://www.isoc.org/INET97/proceedings/F3/F3_1.HTM).
 
-**TCP** is reliable, meaning objects sent are sure to arrive at their destination eventually. **UDP** is faster but unreliable, meaning an object sent may never be delivered. Because it is faster, UDP is typically used when many updates are being sent and it doesn't matter if one update is missed.
+**TCP** is reliable, meaning objects sent are sure to arrive at their destination eventually. **UDP** is faster, but unreliable, meaning an object sent may never be delivered. Because it is faster, UDP is typically used, when many updates are being sent and it does not matter if one update is missed.
 
 Note that KryoNet does not currently implement any extra features for UDP, such as reliability or flow control. It is left to the application to make proper use of the UDP connection. See [here](https://github.com/crykn/quakemonkey) for an example of a delta-snapshot-protocol.
 
@@ -192,7 +192,7 @@ To avoid very large buffer sizes, object graphs can be split into smaller pieces
 
 KryoNet imposes no restrictions on how threading is handled. The `Server` and `Client` classes have an `update()` method that accepts connections and reads or writes any pending data for the current connections. The update method should be called periodically to process network events. Both the `Client` and `Server` classes implement `Runnable` and the `run()` method continually calls update until the `stop()` method is called. 
 
-Handing a client or server to a `java.lang.Thread` is a convenient way to have a dedicated update thread, and this is what the `start` method does. If this doesn't fit your needs, call `update()` manually from the thread of your choice.
+Handing a client or server to a `java.lang.Thread` is a convenient way to have a dedicated update thread, and this is what the `start` method does. If this does not fit your needs, call `update()` manually from the thread of your choice.
 
 Listeners are notified from the update thread, so should not block for long. To change this behavior, take a look at `ThreadedListener` and `QueuedListener`.
 
@@ -293,13 +293,17 @@ If the second parameter for `setNonBlocking` is false, the server will send back
 
 ### KryoNet versus ?
 
-KryoNet makes the assumptions that it will only be used for client/server architectures and that it will be used on both sides of the network. Because KryoNet solves a specific problem, the KryoNet API can do so very elegantly.
+Because KryoNet solves a specific problem (a simple networking API with a powerful serialization solution), the KryoNet API can do so very elegantly. However, KryoNet makes the assumptions that it will only be used for client/server architectures and that it will be used on both sides of the network. For you to make an informed decision, here are some common alternatives to KryoNet:
 
-The [Apache MINA](http://mina.apache.org/) project is similar to KryoNet. MINA's API is lower level and a great deal more complicated. Even the simplest client/server will require a lot more code to be written. Furthermore, MINA is not integrated with a robust serialization framework and doesn't intrinsically support RMI.
+* [Netty](https://netty.io) is another popular networking framework. However, it does not offer a robust out-of-the-box serializing solution like KryoNet and seems to have a steeper learning curve. It also does not intrinsically support RMI.
 
-The [PyroNet](https://code.google.com/p/pyronet/) project (discontinued) is a minimal layer over NIO. It provides TCP networking similar to KryoNet, but without the higher level features. Priobit requires all network communication to occur on a single thread.
+* The [Apache MINA](http://mina.apache.org/) project is similar to KryoNet. MINA's API is lower level and a great deal more complicated. Even the simplest client/server will require a lot more code to be written. Furthermore, MINA is not integrated with a robust serialization framework and doesn't support RMI out-of-the-box.
 
-The [Java Game Networking](http://code.google.com/p/jgn/) project (discontinued as well) is a higher level library similar to KryoNet. JGN does not have as simple of an API.
+* [JRakNet](https://github.com/JRakNet/JRakNet) is a java port of the C++ networking engine [RakNet](https://github.com/facebookarchive/RakNet) and based on Netty. However, it has some shortcomings featurewise (no RMI, no serialization framework) and is a lot less flexible than other networking frameworks.
+
+* [Discontinued] The [PyroNet](https://code.google.com/p/pyronet/) project is a minimal layer over NIO. It provides TCP networking similar to KryoNet, but without the higher level features. Priobit requires all network communication to occur on a single thread.
+
+* [Disconitnued] The [Java Game Networking](http://code.google.com/p/jgn/) project is a higher level library similar to KryoNet. JGN does not have as simple of an API.
 
 ---
   
@@ -329,5 +333,8 @@ dependencies {
 Beyond this documentation page, you may find the following links useful:
 
 - [Kryo](https://github.com/EsotericSoftware/kryo) (the library used for the serialization in *Kryo*Net)
-- [Example code](examples/com/esotericsoftware/kryonet/examples)
+- [Example code](examples/com/esotericsoftware/kryonet/examples):
+   - A simple [chat server](examples/com/esotericsoftware/kryonet/examples/chat)
+   - A [chat server using RMI](examples/com/esotericsoftware/kryonet/examples/chatrmi) (Remote Method Invocation)
+   - A ["game server"](examples/com/esotericsoftware/kryonet/examples/position) (proof of concept) updating the position of clients
 - [Unit tests](src/test/java/com/esotericsoftware/kryonet)

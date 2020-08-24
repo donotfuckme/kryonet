@@ -334,7 +334,7 @@ Beyond this documentation page, you may find the following links useful:
 
 - [Kryo](https://github.com/EsotericSoftware/kryo) (the library used for the serialization in *Kryo*Net)
 - [Example code](examples/com/esotericsoftware/kryonet/examples):
-   - A simple [chat server](examples/com/esotericsoftware/kryonet/examples/chat)
-   - A [chat server using RMI](examples/com/esotericsoftware/kryonet/examples/chatrmi) (Remote Method Invocation)
-   - A ["game server"](examples/com/esotericsoftware/kryonet/examples/position) (proof of concept) updating the position of clients
+   - [Simple chat server](examples/com/esotericsoftware/kryonet/examples/chat)
+   - [Advanced chat server using RMI](examples/com/esotericsoftware/kryonet/examples/chatrmi) (Remote Method Invocation)
+   - [A simple "game server"](examples/com/esotericsoftware/kryonet/examples/position) (proof of concept) updating the position of clients
 - [Unit tests](src/test/java/com/esotericsoftware/kryonet)

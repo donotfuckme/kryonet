@@ -159,6 +159,15 @@ public class Client extends Connection implements EndPoint {
 	/**
 	 * Opens a TCP only client.
 	 *
+	 * @see #connect(int, InetAddress, int)
+	 */
+	public void connect(String host, int tcpPort) throws IOException {
+		connect(500, InetAddress.getByName(host), tcpPort);
+	}
+
+	/**
+	 * Opens a TCP only client.
+	 *
 	 * @see #connect(int, InetAddress, int, int)
 	 */
 	public void connect(int timeout, String host, int tcpPort)
@@ -233,7 +242,7 @@ public class Client extends Connection implements EndPoint {
 				selector.wakeup();
 				endTime = System.currentTimeMillis() + timeout;
 				tcp.connect(selector, new InetSocketAddress(host, tcpPort),
-						connectTimeout);
+						timeout);
 			}
 
 			// Wait for RegisterTCP.

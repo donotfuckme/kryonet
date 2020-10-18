@@ -19,7 +19,7 @@ test {
 
 dependencies {
     compile "com.github.esotericsoftware:jsonbeans:0.9"
-    compile ("com.esotericsoftware:kryo:5.0.0-RC4") {
+    compile ("com.esotericsoftware:kryo:5.0.0") {
     	exclude group: 'com.esotericsoftware', module: 'reflectasm'
     }
     compile "com.esotericsoftware:reflectasm:1.11.9"

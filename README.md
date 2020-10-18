@@ -7,7 +7,7 @@ A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java librar
 This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG) but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet doesn't seem to be actively maintained anymore.
 
 ## Key Changes
-* [Kryo 5.0.0-RC4](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0-RC4) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
+* [Kryo 5.0.0](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
 * `Listener` is now an interface ([#39](https://github.com/EsotericSoftware/kryonet/issues/39)) with empty default methods, which helps to reduce boilerplate code
 * Includes a fix for the common Android 5.0 crash ([#106](https://github.com/EsotericSoftware/kryonet/issues/106), [#120](https://github.com/EsotericSoftware/kryonet/issues/106))
 * The LAN Host Discovery was improved ([#133](https://github.com/EsotericSoftware/kryonet/pull/133)) and is now available to Non-Kryo-Serializations ([#127](https://github.com/EsotericSoftware/kryonet/issues/127))

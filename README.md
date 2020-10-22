@@ -4,18 +4,18 @@
 
 A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java library that provides a clean and simple API for efficient network communication.
 
-This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG), but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet does not seem to be actively maintained anymore.
+This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG), but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet had its last release in 2013 and does not seem to be actively maintained anymore.
 
 ## Key Changes
 * [Kryo 5.0.0](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
 * `Listener` is now an interface ([#39](https://github.com/EsotericSoftware/kryonet/issues/39)) with empty default methods, which helps to reduce boilerplate code
-* Includes a fix for the common Android 5.0 crash ([#106](https://github.com/EsotericSoftware/kryonet/issues/106), [#120](https://github.com/EsotericSoftware/kryonet/issues/106))
+* Includes a fix for the common Android 5.0 crash ([#106](https://github.com/EsotericSoftware/kryonet/issues/106), [#111](https://github.com/EsotericSoftware/kryonet/issues/111), [#120](https://github.com/EsotericSoftware/kryonet/issues/120)), toggleable by `UdpConnection#androidFixDisabled`
 * The LAN Host Discovery was improved ([#133](https://github.com/EsotericSoftware/kryonet/pull/133)) and is now available to Non-Kryo-Serializations ([#127](https://github.com/EsotericSoftware/kryonet/issues/127))
 * A [TypeListener](#typelisteners) was added for easier message handling (takes care of [#130](https://github.com/EsotericSoftware/kryonet/issues/130))
 * Various improvements to the javadoc (especially [#35](https://github.com/EsotericSoftware/kryonet/issues/35), [#44](https://github.com/EsotericSoftware/kryonet/issues/44), [#124](https://github.com/EsotericSoftware/kryonet/issues/124), [#137](https://github.com/EsotericSoftware/kryonet/issues/137)); helps to reduce the most common developer mistakes
 * KryoNet now uses a [gradle](https://gradle.org/) build setup
 * Java 8+ is supported
-* And a lot more minor fixes and changes (inter alia [#109](https://github.com/EsotericSoftware/kryonet/issues/109#issuecomment-643352317)); the documentation (see below) was updated as well
+* All the commits made on the main repo since the last release in 2013 ([#52](https://github.com/EsotericSoftware/kryonet/issues/52), [#98](https://github.com/EsotericSoftware/kryonet/issues/98), [#105](https://github.com/EsotericSoftware/kryonet/issues/105)) and a lot more minor fixes and changes (inter alia [#109](https://github.com/EsotericSoftware/kryonet/issues/109#issuecomment-643352317)); the documentation (see below) was updated as well
 
 A more in-depth changelog is available on the [releases](https://github.com/crykn/kryonet/releases) page.
 
@@ -324,7 +324,7 @@ allprojects {
 }
 	
 dependencies {
-   compile 'com.github.crykn:kryonet:2.22.6'
+   compile 'com.github.crykn:kryonet:2.22.7'
 }
 ```
 

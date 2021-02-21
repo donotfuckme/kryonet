@@ -1,6 +1,6 @@
 apply plugin: "java"
 
-version '2.22.6'
+version '2.22.8'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -18,10 +18,7 @@ test {
 }
 
 dependencies {
-    compile "com.github.esotericsoftware:jsonbeans:0.9"
-    compile ("com.esotericsoftware:kryo:5.0.0") {
-    	exclude group: 'com.esotericsoftware', module: 'reflectasm'
-    }
-    compile "com.esotericsoftware:reflectasm:1.11.9" // is needed because of https://github.com/EsotericSoftware/reflectasm/pull/65
-    testCompile "junit:junit:4.12"
+    compile "com.github.esotericsoftware:jsonbeans:c3520fcc51" // = 0.10
+    compile "com.esotericsoftware:kryo:5.0.3"
+    testCompile "junit:junit:4.13.2"
 }

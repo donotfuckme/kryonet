@@ -203,7 +203,7 @@ public class Server implements EndPoint {
 
 	/**
 	 * @param udpPort
-	 *            May be <code>null</code>.
+	 *            May be {@code null}
 	 */
 	public void bind(InetSocketAddress tcpPort, InetSocketAddress udpPort)
 			throws IOException {
@@ -547,8 +547,8 @@ public class Server implements EndPoint {
 	}
 
 	/**
-	 * Starts a new thread that calls {@link #run()}.
-	 * Make sure you call a {@code bind} before starting your server.
+	 * Starts a new thread that calls {@link #run()}. Make sure you call one of
+	 * the {@code bind} methods before starting your server.
 	 * 
 	 * @see #bind(int)
 	 * @see #bind(int, int)
@@ -622,7 +622,8 @@ public class Server implements EndPoint {
 	}
 
 	void removeConnection(Connection connection) {
-		ArrayList<Connection> temp = new ArrayList<>(Arrays.asList(connections));
+		ArrayList<Connection> temp = new ArrayList<>(
+				Arrays.asList(connections));
 		temp.remove(connection);
 		connections = temp.toArray(new Connection[temp.size()]);
 

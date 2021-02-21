@@ -4,7 +4,7 @@
 
 A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java library that provides a clean and simple API for efficient network communication.
 
-This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG), but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet had its last release in 2013 and does not seem to be actively maintained anymore.
+This fork was specifically made for [ProjektGG](https://github.com/eskalon/ProjektGG), but also adds the most demanded features on KryoNet's issue tracker. If you have a pull request for KryoNet also consider adding it here, as KryoNet had its last release [in 2013](https://github.com/EsotericSoftware/kryonet/releases).
 
 ## Key Changes
 * [Kryo 5.0.0](https://github.com/EsotericSoftware/kryo/releases/tag/kryo-parent-5.0.0) is used for the serialization (for a list of changes and new features since Kryo 3 see [here](https://groups.google.com/forum/#!msg/kryo-users/sBZ10dwrwFQ/hb6FF5ZXCQAJ); takes care of [#77](https://github.com/EsotericSoftware/kryonet/issues/77) and [#123](https://github.com/EsotericSoftware/kryonet/issues/123))
@@ -52,7 +52,7 @@ This code starts a server on TCP port 54555 and UDP port 54777:
 
 The `start()` method starts a thread to handle incoming connections, reading/writing to the socket and notifying listeners.
 
-This code adds a listener to handle receiving objects:
+The following code adds a listener to handle receiving objects. Listeners should be added before binding and starting the server.
 
 ```java
     server.addListener(new Listener() {
@@ -162,7 +162,9 @@ For the above examples to work, the classes that are going to be sent over the n
 
 This must be done on both the client and server, before any network communication occurs. It is very important that the exact same classes are registered on both the client and server and that they are registered in the exact same order. Because of this, typically the code that registers classes is placed in a method on a class available to both the client and server.
 
-Please look at the [Kryo serialization library](https://github.com/EsotericSoftware/kryo) for more information on how objects are serialized for network transfer. Kryo can serialize any object and supports data compression (e.g. deflate compression).
+Alternatively, Kryo can be configured to allow serialization without registering classes up front (`kryo.setRegistrationRequired(false)`). While this is useful for testing purposes, it can [pose a security risk and leads to larger packet sizes](https://github.com/EsotericSoftware/kryo#optional-registration). In addition, `kryo.setWarnUnregisteredClasses(true)` can be used to log, whenever a unregistered class is serialized.
+
+For further information on how objects are serialized for network transfer, please take a look at the [Kryo serialization library](https://github.com/EsotericSoftware/kryo). Kryo can serialize any object and supports data compression (e.g. deflate compression).
 
 ---
 

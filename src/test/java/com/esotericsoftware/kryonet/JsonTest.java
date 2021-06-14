@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import com.esotericsoftware.kryonet.serialization.JsonSerialization;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -30,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class JsonTest extends KryoNetTestCase {
 	String fail;
 
+	@Test
 	public void testJson() throws IOException {
 		fail = null;
 
@@ -38,8 +40,7 @@ public class JsonTest extends KryoNetTestCase {
 		final Data dataUDP = new Data();
 		populateData(dataUDP, false);
 
-		final Server server = new Server(16384, 8192,
-				new JsonSerialization());
+		final Server server = new Server(16384, 8192, new JsonSerialization());
 		startEndPoint(server);
 		server.bind(tcpPort, udpPort);
 		Listener listener;
@@ -76,8 +77,7 @@ public class JsonTest extends KryoNetTestCase {
 
 		// ----
 
-		final Client client = new Client(16384, 8192,
-				new JsonSerialization());
+		final Client client = new Client(16384, 8192, new JsonSerialization());
 		startEndPoint(client);
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
@@ -112,8 +112,7 @@ public class JsonTest extends KryoNetTestCase {
 			server.removeListener(listener);
 			assertEquals(0, server.listeners.length);
 		}
-		
-		
+
 		if (fail != null)
 			fail(fail);
 	}

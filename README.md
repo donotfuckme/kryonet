@@ -326,7 +326,7 @@ allprojects {
 }
 	
 dependencies {
-   compile 'com.github.crykn:kryonet:2.22.7'
+   compile 'com.github.crykn:kryonet:2.22.8'
 }
 ```
 

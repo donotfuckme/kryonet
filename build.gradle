@@ -1,4 +1,4 @@
-apply plugin: "java"
+apply plugin: "java-library"
 
 version '2.22.8'
 
@@ -14,10 +14,18 @@ test {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+	systemProperty "file.encoding", "UTF-8"
+}
+
 dependencies {
     implementation "com.github.esotericsoftware:jsonbeans:c3520fcc51" // = 0.10
-    implementation "com.esotericsoftware:kryo:5.1.1"
+    implementation "com.esotericsoftware:kryo:5.4.0"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.0-M1"
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.8.0-M1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.2"
 }

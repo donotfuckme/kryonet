@@ -24,6 +24,7 @@ import java.util.Arrays;
 
 import com.esotericsoftware.kryonet.serialization.JsonSerialization;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.ToStringBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -221,7 +222,14 @@ public class JsonTest extends KryoNetTestCase {
 		}
 
 		public String toString() {
-			return "Data";
+			return new ToStringBuilder(this).append("string", string)
+					.append("strings", strings).append("ints", ints)
+					.append("shorts", shorts).append("floats", floats)
+					.append("bytes", bytes).append("booleans", booleans)
+					.append("Ints", Ints).append("Shorts", Shorts)
+					.append("Floats", Floats).append("Bytes", Bytes)
+					.append("Booleans", Booleans).append("isTCP", isTCP)
+					.toString();
 		}
 	}
 }

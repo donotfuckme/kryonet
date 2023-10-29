@@ -264,27 +264,23 @@ Exactly how the remote method invocation is performed can be customized by casti
 
 ```java
     SomeObject someObject = ObjectSpace.getRemoteObject(connection, 42, SomeObject.class);
-    ((RemoteObject)someObject).setNonBlocking(true, true);
+    ((RemoteObject)someObject).setNonBlocking(true);
     someObject.doSomething();
 ```
 
 Note that the SomeObject class does not need to implement RemoteObject, this is handled automatically.
 
-The first `true` passed to `setNonBlocking` causes remote method invocations to be non-blocking. When `doSomething` is invoked, it will not block and wait for the return value. Instead the method will just return null.
-
-The second `true` passed to `setNonBlocking` indicates that the return value of remote method invocations are to be ignored. This means the server will not waste time or bandwidth sending the result of the remote method invocation.
-
-If the second parameter for `setNonBlocking` is false, the server will send back the remote method invocation return value. There are two ways to access a return value for a non-blocking method invocation:
+The method `setNonBlocking(true)` causes remote method invocations to be non-blocking, i.e. when `doSomething` is invoked, it will not block and wait for the return value. Instead the method will just return null. The return value or any thrown exception for a non-blocking method invocation can still be retrieved if they are being transmitted (see `#setTransmitReturnValue` and `#setTransmitExceptions`):
 
 ```java
     RemoteObject remoteObject = (RemoteObject)someObject;
-    remoteObject.setNonBlocking(true, false);
+    remoteObject.setNonBlocking(true);
     someObject.doSomething();
     // ...
     SomeResult result = remoteObject.waitForLastResponse();
 
     RemoteObject remoteObject = (RemoteObject)someObject;
-    remoteObject.setNonBlocking(true, false);
+    remoteObject.setNonBlocking(true);
     someObject.doSomething();
     byte responseID = remoteObject.getLastResponseID();
     // ...

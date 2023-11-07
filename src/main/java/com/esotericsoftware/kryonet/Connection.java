@@ -46,7 +46,7 @@ import com.esotericsoftware.kryonet.serialization.Serialization;
  * a {@link Server}. If either underlying connection is closed or errors, both
  * connections are closed.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public class Connection {
 	int id = -1;

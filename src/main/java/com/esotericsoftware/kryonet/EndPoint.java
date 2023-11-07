@@ -27,7 +27,7 @@ import com.esotericsoftware.kryonet.serialization.KryoSerialization;
 /**
  * Represents the local end point of a connection.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public interface EndPoint extends Runnable {
 

@@ -57,7 +57,7 @@ import com.esotericsoftware.kryonet.serialization.Serialization;
 /**
  * Represents a TCP and optionally a UDP connection to a {@link Server}.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public class Client extends Connection implements EndPoint {
 	static {

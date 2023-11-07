@@ -97,7 +97,7 @@ public interface Listener {
 	 * writing a series of simple "instanceof" statements.
 	 * <p>
 	 * To add a handler for a specific type use
-	 * {@link #addHandler(Class, BiConsumer)}.
+	 * {@link #addTypeHandler(Class, BiConsumer)}.
 	 */
 	static public class TypeListener implements Listener {
 

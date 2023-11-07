@@ -26,7 +26,7 @@ import com.esotericsoftware.minlog.Log;
  * is generally invisible to the developer. Eg, these messages are only logged
  * at the {@link Log#LEVEL_TRACE} level.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public interface FrameworkMessage {
 	FrameworkMessage.KeepAlive keepAlive = new KeepAlive();

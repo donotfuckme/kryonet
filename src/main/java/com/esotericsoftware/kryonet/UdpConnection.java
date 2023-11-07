@@ -34,7 +34,7 @@ import java.nio.channels.Selector;
 import com.esotericsoftware.kryonet.serialization.Serialization;
 
 /**
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public class UdpConnection {
 

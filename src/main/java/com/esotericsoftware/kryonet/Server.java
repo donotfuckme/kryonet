@@ -56,7 +56,7 @@ import com.esotericsoftware.kryonet.serialization.Serialization;
  * Manages TCP and optionally UDP connections from many {@linkplain Client
  * Clients}.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public class Server implements EndPoint {
 	public static final int DEFAULT_WRITE_BUFFER_SIZE = 16384;

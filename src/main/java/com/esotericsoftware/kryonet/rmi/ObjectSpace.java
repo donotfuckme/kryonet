@@ -74,7 +74,7 @@ import com.esotericsoftware.reflectasm.MethodAccess;
  * <p>
  * ObjectSpace requires {@link KryoSerialization}.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public class ObjectSpace {
 	static private final int returnValueMask = 1 << 7;
@@ -991,7 +991,7 @@ public class ObjectSpace {
 	 * gets a {@link RemoteObject} proxy rather than the bytes for the
 	 * serialized object.
 	 *
-	 * @author Nathan Sweet <misc@n4te.com>
+	 * @author Nathan Sweet &lt;misc@n4te.com&gt;
 	 */
 	static public class RemoteObjectSerializer extends Serializer {
 		@Override

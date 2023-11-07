@@ -24,7 +24,7 @@ import com.esotericsoftware.kryonet.Connection;
 /**
  * Provides access to various settings on a remote object.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
  *      int, Class...)
  */

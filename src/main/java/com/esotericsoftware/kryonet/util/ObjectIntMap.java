@@ -137,7 +137,7 @@ public class ObjectIntMap<K> implements Iterable<ObjectIntMap.Entry<K>> {
 	}
 
 	/**
-	 * Returns an index >= 0 and <= {@link #mask} for the specified
+	 * Returns an index &gt;= 0 and &lt;= {@link #mask} for the specified
 	 * {@code item}.
 	 * <p>
 	 * The default implementation uses Fibonacci hashing on the item's

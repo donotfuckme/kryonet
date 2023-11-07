@@ -24,7 +24,7 @@ package com.esotericsoftware.kryonet.rmi;
  * the response is not received within the
  * {@link RemoteObject#setResponseTimeout(int) response timeout}.
  *
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
  *      int, Class...)
  */

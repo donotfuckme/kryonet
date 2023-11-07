@@ -36,7 +36,7 @@ import java.nio.channels.SocketChannel;
 import com.esotericsoftware.kryonet.serialization.Serialization;
 
 /**
- * @author Nathan Sweet <misc@n4te.com>
+ * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 class TcpConnection {
 

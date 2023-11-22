@@ -275,10 +275,12 @@ public class RmiTest extends KryoNetTestCase {
 		// Needed for throwable:
 		kryo.register(StackTraceElement[].class);
 		kryo.register(StackTraceElement.class);
-		kryo.register(
-				Collections.unmodifiableList(new ArrayList<>(1)).getClass(),
-				new JavaSerializer()); // -> Java 1.8
-		// kryo.register(Collections.EMPTY_LIST.getClass()); // -> Java 1.9+
+		//@formatter:off
+//		kryo.register(
+//				Collections.unmodifiableList(new ArrayList<>(1)).getClass(),
+//				new JavaSerializer()); // -> Java 1.8
+		//@formatter:on
+		kryo.register(Collections.EMPTY_LIST.getClass()); // -> Java 1.9+
 		kryo.setReferences(true); // Needed for UnsupportedOperationException,
 									// which has a circular reference in the
 									// cause field.

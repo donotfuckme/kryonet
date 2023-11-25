@@ -1,6 +1,6 @@
 ![KryoNet](https://raw.github.com/wiki/EsotericSoftware/kryonet/images/logo.jpg)
 
-[![Release](https://jitpack.io/v/crykn/kryonet.svg)](https://jitpack.io/#crykn/kryonet) [![Build Status](https://app.travis-ci.com/crykn/kryonet.svg?branch=master)](https://app.travis-ci.com/crykn/kryonet)
+[![Release](https://jitpack.io/v/crykn/kryonet.svg)](https://jitpack.io/#crykn/kryonet) [![Build](https://img.shields.io/github/actions/workflow/status/crykn/kryonet/build-and-test.yml?label=Build)](https://github.com/crykn/kryonet/actions) 
 
 A fork of [KryoNet](https://github.com/EsotericSoftware/kryonet/), a Java library that provides a clean and simple API for efficient network communication.
 

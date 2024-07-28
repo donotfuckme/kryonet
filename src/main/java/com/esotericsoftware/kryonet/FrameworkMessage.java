@@ -1,15 +1,15 @@
 /* Copyright (c) 2008, Nathan Sweet
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following
  * conditions are met:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  * - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
  * disclaimer in the documentation and/or other materials provided with the distribution.
  * - Neither the name of Esoteric Software nor the names of its contributors may be used to endorse or promote products derived
  * from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
  * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
  * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
@@ -29,39 +29,42 @@ import com.esotericsoftware.minlog.Log;
  * @author Nathan Sweet &lt;misc@n4te.com&gt;
  */
 public interface FrameworkMessage {
-	FrameworkMessage.KeepAlive keepAlive = new KeepAlive();
 
-	/**
-	 * Internal message to give the client the server assigned connection ID.
-	 */
-	class RegisterTCP implements FrameworkMessage {
-		public int connectionID;
-	}
+  FrameworkMessage.KeepAlive keepAlive = new KeepAlive();
 
-	/**
-	 * Internal message to give the server the client's UDP port.
-	 */
-	class RegisterUDP implements FrameworkMessage {
-		public int connectionID;
-	}
+  /**
+   * Internal message to give the client the server assigned connection ID.
+   */
+  class RegisterTCP implements FrameworkMessage {
+    public int connectionID;
+  }
 
-	/**
-	 * Internal message to keep connections alive.
-	 */
-	class KeepAlive implements FrameworkMessage {
-	}
+  /**
+   * Internal message to give the server the client's UDP port.
+   */
+  class RegisterUDP implements FrameworkMessage {
+    public int connectionID;
+  }
 
-	/**
-	 * Internal message to discover running servers.
-	 */
-	class DiscoverHost implements FrameworkMessage {
-	}
+  /**
+   * Internal message to keep connections alive.
+   */
+  class KeepAlive implements FrameworkMessage {
 
-	/**
-	 * Internal message to determine round trip time.
-	 */
-	class Ping implements FrameworkMessage {
-		public int id;
-		public boolean isReply;
-	}
+  }
+
+  /**
+   * Internal message to discover running servers.
+   */
+  class DiscoverHost implements FrameworkMessage {
+
+  }
+
+  /**
+   * Internal message to determine round trip time.
+   */
+  class Ping implements FrameworkMessage {
+    public int id;
+    public boolean isReply;
+  }
 }

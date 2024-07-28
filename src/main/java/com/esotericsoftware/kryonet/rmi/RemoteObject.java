@@ -1,15 +1,15 @@
 /* Copyright (c) 2008, Nathan Sweet
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following
  * conditions are met:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  * - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
  * disclaimer in the documentation and/or other materials provided with the distribution.
  * - Neither the name of Esoteric Software nor the names of its contributors may be used to endorse or promote products derived
  * from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
  * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
  * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
@@ -26,137 +26,135 @@ import com.esotericsoftware.kryonet.Connection;
  *
  * @author Nathan Sweet &lt;misc@n4te.com&gt;
  * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
- *      int, Class...)
+ * int, Class...)
  */
 public interface RemoteObject {
-	/**
-	 * Sets the milliseconds to wait for a method to return value. Default is
-	 * <code>3000</code>.
-	 */
-	void setResponseTimeout(int timeoutMillis);
 
-	/**
-	 * Sets the blocking behavior when invoking a remote method. Default is
-	 * false.
-	 *
-	 * @param nonBlocking
-	 *            If false, the invoking thread will wait for the remote method
-	 *            to return or timeout (default). If true, the invoking thread
-	 *            will not wait for a response. The method will return
-	 *            immediately and the return value should be ignored. If they
-	 *            are being transmitted, the return value or any thrown
-	 *            exception can later be retrieved with
-	 *            {@link #waitForLastResponse()} or
-	 *            {@link #waitForResponse(byte)}. The responses will be stored
-	 *            until retrieved, so each method call should have a matching
-	 *            retrieve.
-	 */
-	void setNonBlocking(boolean nonBlocking);
+  /**
+   * Sets the milliseconds to wait for a method to return value. Default is
+   * <code>3000</code>.
+   */
+  void setResponseTimeout(int timeoutMillis);
 
-	/**
-	 * Sets whether return values are sent back when invoking a remote method.
-	 * Default is <code>true</code>.
-	 *
-	 * @param transmit
-	 *            If true, then the return value for non-blocking method
-	 *            invocations can be retrieved with
-	 *            {@link #waitForLastResponse()} or
-	 *            {@link #waitForResponse(byte)}. If <code>false</code>, then
-	 *            non-primitive return values for remote method invocations are
-	 *            not sent by the remote side of the connection and the response
-	 *            can never be retrieved. This can also be used to save
-	 *            bandwidth if you will not check the return value of a blocking
-	 *            remote invocation. Note that an exception could still be
-	 *            returned by {@link #waitForLastResponse()} or
-	 *            {@link #waitForResponse(byte)} if
-	 *            {@link #setTransmitExceptions(boolean)} is <code>true</code>.
-	 */
-	void setTransmitReturnValue(boolean transmit);
+  /**
+   * Sets the blocking behavior when invoking a remote method. Default is
+   * false.
+   *
+   * @param nonBlocking If false, the invoking thread will wait for the remote method
+   *                    to return or timeout (default). If true, the invoking thread
+   *                    will not wait for a response. The method will return
+   *                    immediately and the return value should be ignored. If they
+   *                    are being transmitted, the return value or any thrown
+   *                    exception can later be retrieved with
+   *                    {@link #waitForLastResponse()} or
+   *                    {@link #waitForResponse(byte)}. The responses will be stored
+   *                    until retrieved, so each method call should have a matching
+   *                    retrieve.
+   */
+  void setNonBlocking(boolean nonBlocking);
 
-	/**
-	 * Sets whether exceptions are sent back when invoking a remote method.
-	 * Default is true.
-	 *
-	 * @param transmit
-	 *            If false, exceptions will be unhandled and rethrown as
-	 *            RuntimeExceptions inside the invoking thread. This is the
-	 *            legacy behavior. If <code>true</code>, behavior is dependent
-	 *            on whether {@link #setNonBlocking(boolean)}. If non-blocking
-	 *            is <code>true</code>, the exception will be serialized and
-	 *            sent back to the call site of the remotely invoked method,
-	 *            where it will be re-thrown. If non-blocking is
-	 *            <code>false</code>, an exception will not be thrown in the
-	 *            calling thread but instead can be retrieved with
-	 *            {@link #waitForLastResponse()} or
-	 *            {@link #waitForResponse(byte)}, similar to a return value.
-	 */
-	void setTransmitExceptions(boolean transmit);
+  /**
+   * Sets whether return values are sent back when invoking a remote method.
+   * Default is <code>true</code>.
+   *
+   * @param transmit If true, then the return value for non-blocking method
+   *                 invocations can be retrieved with
+   *                 {@link #waitForLastResponse()} or
+   *                 {@link #waitForResponse(byte)}. If <code>false</code>, then
+   *                 non-primitive return values for remote method invocations are
+   *                 not sent by the remote side of the connection and the response
+   *                 can never be retrieved. This can also be used to save
+   *                 bandwidth if you will not check the return value of a blocking
+   *                 remote invocation. Note that an exception could still be
+   *                 returned by {@link #waitForLastResponse()} or
+   *                 {@link #waitForResponse(byte)} if
+   *                 {@link #setTransmitExceptions(boolean)} is <code>true</code>.
+   */
+  void setTransmitReturnValue(boolean transmit);
 
-	/**
-	 * If true, UDP will be used to send the remote method invocation. UDP
-	 * remote method invocations will never return a response and the invoking
-	 * thread will not wait for a response.
-	 */
-	void setUDP(boolean udp);
+  /**
+   * Sets whether exceptions are sent back when invoking a remote method.
+   * Default is true.
+   *
+   * @param transmit If false, exceptions will be unhandled and rethrown as
+   *                 RuntimeExceptions inside the invoking thread. This is the
+   *                 legacy behavior. If <code>true</code>, behavior is dependent
+   *                 on whether {@link #setNonBlocking(boolean)}. If non-blocking
+   *                 is <code>true</code>, the exception will be serialized and
+   *                 sent back to the call site of the remotely invoked method,
+   *                 where it will be re-thrown. If non-blocking is
+   *                 <code>false</code>, an exception will not be thrown in the
+   *                 calling thread but instead can be retrieved with
+   *                 {@link #waitForLastResponse()} or
+   *                 {@link #waitForResponse(byte)}, similar to a return value.
+   */
+  void setTransmitExceptions(boolean transmit);
 
-	/**
-	 * If set to false, calls to {@link Object#toString()} will return
-	 * {@literal "<proxy>"} instead of invoking the remote method. Default is
-	 * <code>false</code>.
-	 */
-	void setRemoteToString(boolean remoteToString);
+  /**
+   * If true, UDP will be used to send the remote method invocation. UDP
+   * remote method invocations will never return a response and the invoking
+   * thread will not wait for a response.
+   */
+  void setUDP(boolean udp);
 
-	/**
-	 * Waits for the response to the last method invocation to be received or
-	 * the response timeout to be reached. Must not be called from the
-	 * connection's update thread.
-	 *
-	 * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
-	 *      int, Class...)
-	 */
-	Object waitForLastResponse();
+  /**
+   * If set to false, calls to {@link Object#toString()} will return
+   * {@literal "<proxy>"} instead of invoking the remote method. Default is
+   * <code>false</code>.
+   */
+  void setRemoteToString(boolean remoteToString);
 
-	/**
-	 * Returns true if the response to the last method invocation has been
-	 * received and can be retrieved using {@link #waitForLastResponse()}
-	 * without blocking.
-	 */
-	Object hasLastResponse();
+  /**
+   * Waits for the response to the last method invocation to be received or
+   * the response timeout to be reached. Must not be called from the
+   * connection's update thread.
+   *
+   * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
+   * int, Class...)
+   */
+  Object waitForLastResponse();
 
-	/**
-	 * Gets the ID of response for the last method invocation.
-	 */
-	byte getLastResponseID();
+  /**
+   * Returns true if the response to the last method invocation has been
+   * received and can be retrieved using {@link #waitForLastResponse()}
+   * without blocking.
+   */
+  Object hasLastResponse();
 
-	/**
-	 * Waits for the specified method invocation response to be received or the
-	 * response timeout to be reached. Must not be called from the connection's
-	 * update thread. Response IDs use a six bit identifier, with one identifier
-	 * reserved for "no response". This means that this method should be called
-	 * to get the result for a non-blocking call before an additional 63
-	 * non-blocking calls are made, or risk undefined behavior due to identical
-	 * IDs.
-	 *
-	 * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
-	 *      int, Class...)
-	 */
-	Object waitForResponse(byte responseID);
+  /**
+   * Gets the ID of response for the last method invocation.
+   */
+  byte getLastResponseID();
 
-	/**
-	 * Returns true if the response to the specified method invocation has been
-	 * received and can be retrieved using {@link #waitForResponse(byte)}
-	 * without blocking.
-	 */
-	Object hasResponse(byte responseID);
+  /**
+   * Waits for the specified method invocation response to be received or the
+   * response timeout to be reached. Must not be called from the connection's
+   * update thread. Response IDs use a six bit identifier, with one identifier
+   * reserved for "no response". This means that this method should be called
+   * to get the result for a non-blocking call before an additional 63
+   * non-blocking calls are made, or risk undefined behavior due to identical
+   * IDs.
+   *
+   * @see ObjectSpace#getRemoteObject(com.esotericsoftware.kryonet.Connection,
+   * int, Class...)
+   */
+  Object waitForResponse(byte responseID);
 
-	/**
-	 * Causes this RemoteObject to stop listening to the connection for method
-	 * invocation response messages.
-	 */
-	void close();
+  /**
+   * Returns true if the response to the specified method invocation has been
+   * received and can be retrieved using {@link #waitForResponse(byte)}
+   * without blocking.
+   */
+  Object hasResponse(byte responseID);
 
-	/**
-	 * Returns the local connection for this remote object.
-	 */
-	Connection getConnection();
+  /**
+   * Causes this RemoteObject to stop listening to the connection for method
+   * invocation response messages.
+   */
+  void close();
+
+  /**
+   * Returns the local connection for this remote object.
+   */
+  Connection getConnection();
 }
